@@ -55,7 +55,7 @@ var setup = function(data)
     
     //drawLegend(data,cScale);
     drawArray(data,xScale,yScale);
-    
+
 }
 
 var drawArray = function(data,xScale,yScale,cScale)
@@ -67,21 +67,27 @@ var drawArray = function(data,xScale,yScale,cScale)
     .append("g")
     .attr("fill", "none")
     .attr("stroke", "black")      
-    .attr("stroke-width", 3)
+    .attr("stroke-width", 1.5)
+    .on("mouseover", function(d)
+
+        {d3.select("body").append("img").attr("src", "penguins/" + data.picture);
+         console.log(data.picture)
+})
+    
+    .on("mouseout", function()
+    {
+        d3.select("body").selectAll("img").remove();
+    })
     
 var lineGenerator = d3.line()
     .x(function(num,index){return xScale(index)})
     .y(function(num){return yScale(num)})
-    .curve(d3.curveNatural)
-
+   // .curve(d3.curveNatural)
 arrays.datum(function(obj)
 
 {
     return obj.quizes.map(function(d){return d.grade;});
 })
-    
     .append("path")  
     .attr("d", lineGenerator);
-    
 }
-
