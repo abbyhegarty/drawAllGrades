@@ -1,4 +1,4 @@
-var penguinPromise = d3.json("penguins/classData.json")
+var penguinPromise = d3.json("classData.json")
 
 penguinPromise.then(function(data)
 {                  
@@ -55,7 +55,7 @@ var setup = function(data)
     
     //drawLegend(data,cScale);
     drawArray(data,xScale,yScale);
-
+    
 }
 
 var drawArray = function(data,xScale,yScale,cScale)
@@ -67,27 +67,31 @@ var drawArray = function(data,xScale,yScale,cScale)
     .append("g")
     .attr("fill", "none")
     .attr("stroke", "black")      
-    .attr("stroke-width", 1.5)
-    .on("mouseover", function(d)
-
-        {d3.select("body").append("img").attr("src", "penguins/" + data.picture);
-         console.log(data.picture)
-})
-    
-    .on("mouseout", function()
-    {
-        d3.select("body").selectAll("img").remove();
+    .attr("stroke-width", 2)
+    .on("mouseover", function(data)
+        {
+        d3.select(this)
+        .attr("stroke", "red")
+    })
+    .on("mouseout", function(data)
+        {
+        d3.select(this)
+        .attr("stroke", "black")
     })
     
 var lineGenerator = d3.line()
     .x(function(num,index){return xScale(index)})
     .y(function(num){return yScale(num)})
-   // .curve(d3.curveNatural)
+    //.curve(d3.curveNatural)
+
 arrays.datum(function(obj)
 
 {
     return obj.quizes.map(function(d){return d.grade;});
 })
+    
     .append("path")  
     .attr("d", lineGenerator);
+    
 }
+
