@@ -66,23 +66,27 @@ var drawArray = function(data,xScale,yScale,cScale)
     .enter()
     .append("g")
     .attr("fill", "none")
-    .attr("stroke", "black")      
-    .attr("stroke-width", 2)
+    .attr("stroke", "gray")      
+    .attr("stroke-width", 1)
     .on("mouseover", function(data)
         {
         d3.select(this)
         .attr("stroke", "red")
+        .attr("stroke-width", 10)
+        .raise(this);
+        
     })
     .on("mouseout", function(data)
         {
         d3.select(this)
-        .attr("stroke", "black")
+        .attr("stroke", "gray")
+        .attr("stroke-width", 1)
     })
     
 var lineGenerator = d3.line()
     .x(function(num,index){return xScale(index)})
     .y(function(num){return yScale(num)})
-    //.curve(d3.curveNatural)
+    .curve(d3.curveNatural)
 
 arrays.datum(function(obj)
 
