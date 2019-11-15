@@ -1,4 +1,4 @@
-var penguinPromise = d3.json("classData.json")
+var penguinPromise = d3.json("penguins/classData.json")
 
 penguinPromise.then(function(data)
 {                  
